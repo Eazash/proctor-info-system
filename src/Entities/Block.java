@@ -64,11 +64,6 @@ public class Block {
 
     public static void saveAllToFile(ArrayList<Block> blocks) throws IOException {
         File file = new File("blocks.bin");
-        if (file.exists() && file.isFile())
-        {
-            file.delete();
-        }
-        file.createNewFile();
         FileOutputStream toBlockFile = new FileOutputStream(file);
         ObjectOutputStream outputStream = new ObjectOutputStream(toBlockFile);
 
