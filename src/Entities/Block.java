@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class Block {
@@ -45,5 +46,36 @@ public class Block {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+    public static ArrayList<Block> loadAllFromFile() throws FileNotFoundException, IOException, ClassNotFoundException {
+        File dormFile = new File("blocks.bin");
+        ArrayList<Block> blocks= new ArrayList<>();
+        FileInputStream inDormFile = new FileInputStream(dormFile);
+        ObjectInputStream inputStream = new ObjectInputStream(inDormFile);
+        try{
+            while(true){
+                blocks.add((Block)inputStream.readObject());
+            }
+        }catch(EOFException exc){}
+        inputStream.close();
+        inDormFile.close();
+        return blocks;
+    }
+
+    public static void saveAllToFile(ArrayList<Block> blocks) throws IOException {
+        File file = new File("blocks.bin");
+        if (file.exists() && file.isFile())
+        {
+            file.delete();
+        }
+        file.createNewFile();
+        FileOutputStream toBlockFile = new FileOutputStream(file);
+        ObjectOutputStream outputStream = new ObjectOutputStream(toBlockFile);
+
+        for(Block block : blocks){
+            outputStream.writeObject(block);
+        };
+        outputStream.close();
+        toBlockFile.close();
     }
 }
