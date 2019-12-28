@@ -10,6 +10,14 @@ public class Student extends Person {
     private Year year;
     private Dorm dorm;
 
+    public Student(String firstName, String lastName, int age, String gender, String studentID, Department department, Year year, Dorm dorm) {
+        super(firstName, lastName, age, gender);
+        this.studentID = studentID;
+        this.department = department;
+        this.year = year;
+        this.dorm = dorm;
+    }
+
     public String getStudentID() {
         return studentID;
     }
@@ -42,12 +50,6 @@ public class Student extends Person {
         this.dorm = dorm;
     }
 
-    public Student(String studentID, Department department, Year year, Dorm dorm) {
-        this.studentID = studentID;
-        this.department = department;
-        this.year = year;
-        this.dorm = dorm;
-    }
     public static ArrayList<Student> loadAllFromFile() throws FileNotFoundException, IOException, ClassNotFoundException {
         File studentFile = new File("students.bin");
         ArrayList<Student> students= new ArrayList<>();
