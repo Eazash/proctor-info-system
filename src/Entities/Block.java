@@ -33,7 +33,6 @@ public class Block {
             }
         }
         return dorm;
-
     }
 
     public void setDorms(ArrayList<Dorm> dorms) {
